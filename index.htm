@@ -1,275 +1,1987 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset={dede:global.cfg_soft_lang/}" />
-<title>{dede:global.cfg_webname/}</title>
-<meta name="description" content="{dede:global.cfg_description/}" />
-<meta name="keywords" content="{dede:global.cfg_keywords/}" />
-<link href="{dede:global.cfg_templets_skin/}/style/dedecms.css" rel="stylesheet" media="screen" type="text/css" />
-<meta http-equiv="mobile-agent" content="format=xhtml;url={dede:global.cfg_mobileurl/}/index.php">
-<script type="text/javascript">if(window.location.toString().indexOf('pref=padindex') != -1){}else{if(/AppleWebKit.*Mobile/i.test(navigator.userAgent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent))){if(window.location.href.indexOf("?mobile")<0){try{if(/Android|Windows Phone|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)){window.location.href="{dede:global.cfg_mobileurl/}/index.php";}else if(/iPad/i.test(navigator.userAgent)){}else{}}catch(e){}}}}</script>
-<script language="javascript" type="text/javascript" src="{dede:global.cfg_cmsurl/}/include/dedeajax2.js"></script>
-<script language="javascript" type="text/javascript" src="{dede:global.cfg_cmspath/}/images/js/j.js" ></script>
-<script language="javascript" type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/pic_scroll.js"></script>
-<script language="javascript" type="text/javascript">
-<!--
-	$(function(){
-		$("a[_for]").mouseover(function(){
-			$(this).parents().children("a[_for]").removeClass("thisclass").parents().children("dd").hide();
-			$(this).addClass("thisclass").blur();
-			$("#"+$(this).attr("_for")).show();
-		});
-		$("a[_for=uc_member]").mouseover();
-		$("a[_for=flink_1]").mouseover();
-	});
-	
-	function CheckLogin(){
-	  var taget_obj = document.getElementById('_userlogin');
-	  myajax = new DedeAjax(taget_obj,false,false,'','','');
-	  myajax.SendGet2("{dede:global.cfg_cmspath/}/member/ajax_loginsta.php");
-	  DedeXHTTP = null;
-	}
--->
-</script>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,Chrome=1" />
+	<title>{dede:global.cfg_webname/}</title>
+	<meta name="description" content="{dede:global.cfg_description/}" />
+	<meta name="keywords" content="{dede:global.cfg_keywords/}" />
+	<link rel="stylesheet" href="{dede:global.cfg_templets_skin/}/css/reset-and-utils-1.0.css" />
+	<link rel="stylesheet" href="{dede:global.cfg_templets_skin/}/css/style.css" />
+	<script src="{dede:global.cfg_templets_skin/}/js/jquery-1.11.1.min.js"></script>
+	<script src="{dede:global.cfg_templets_skin/}/js/slideshow.pack.min.js"></script>
+	<script src="{dede:global.cfg_templets_skin/}/js/slick1.3.6.min.js"></script>
 </head>
-<body class="index">
-{dede:include filename="head.htm"/}
-<!-- /header -->
-<div class="w960 center clear mt1">
- <div class="pleft">
-  <div class="bignews">
-   <!--头条-->
-   <div class="onenews"> {dede:arclist flag='h' limit='0,1' infolen='230'}
-    <h2><a href="[field:arcurl/]">[field:title/]</a></h2>
-    <p>[field:info/]...<a href="[field:arcurl/]">[查看全文]</a></p>
-    {/dede:arclist} </div>
-   <!-- /onenews -->
-   <div class="d1"> {dede:arclist flag='h' limit='1,4'}
-    <div class='d1arc'><a href="[field:arcurl/]">[field:title/]</a></div>
-    {/dede:arclist} </div>
-   <!--/头条-->
-   <div class='newarticle'>最新文章</div>
-   <ul class="c2 ico1">
-    <!--最新文档-->
-    {dede:arclist row=14 titlelen=32 noflag='h'}
-    <li><a href="[field:arcurl/]">[field:title/]</a></li>
-    {/dede:arclist}
-    <!--//最新文档-->
-   </ul>
-  </div>
-  <!-- /bignews -->
-  <div class="flashnews">
-   <!-- size: 280px * 192px -->
-   <script language='javascript'>
-linkarr = new Array();
-picarr = new Array();
-textarr = new Array();
-var swf_width=280;
-var swf_height=192;
-//文字颜色|文字位置|文字背景颜色|文字背景透明度|按键文字颜色|按键默认颜色|按键当前颜色|自动播放时间|图片过渡效果|是否显示按钮|打开方式
-var configtg='0xffffff|0|0x3FA61F|5|0xffffff|0xC5DDBC|0x000033|2|3|1|_blank';
-var files = "";
-var links = "";
-var texts = "";
-//这里设置调用标记
-{dede:arclist flag='f' row='5'}
-linkarr[[field:global.autoindex/]] = "[field:arcurl/]";
-picarr[[field:global.autoindex/]]  = "[field:litpic/]";
-textarr[[field:global.autoindex/]] = "[field:title function='html2text(@me)'/]";
-{/dede:arclist}
-for(i=1;i<picarr.length;i++){
-if(files=="") files = picarr[i];
-else files += "|"+picarr[i];
-}
-for(i=1;i<linkarr.length;i++){
-if(links=="") links = linkarr[i];
-else links += "|"+linkarr[i];
-}
-for(i=1;i<textarr.length;i++){
-if(texts=="") texts = textarr[i];
-else texts += "|"+textarr[i];
-}
-document.write('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="'+ swf_width +'" height="'+ swf_height +'">');
-document.write('<param name="movie" value="{dede:global.cfg_templeturl /}/default/images/bcastr3.swf"><param name="quality" value="high">');
-document.write('<param name="menu" value="false"><param name=wmode value="opaque">');
-document.write('<param name="FlashVars" value="bcastr_file='+files+'&bcastr_link='+links+'&bcastr_title='+texts+'&bcastr_config='+configtg+'">');
-document.write('<embed src="{dede:global.cfg_templeturl /}/default/images/bcastr3.swf" wmode="opaque" FlashVars="bcastr_file='+files+'&bcastr_link='+links+'&bcastr_title='+texts+'&bcastr_config='+configtg+'&menu="false" quality="high" width="'+ swf_width +'" height="'+ swf_height +'" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />'); document.write('</object>');
-</script>
-  </div>
-  <!-- /flashnews -->
-  <div class="latestnews">
-   <dl class="tbox light">
-    <dt class="light"><strong>特别推荐</strong></dt>
-    <dd class="light">
-     <ul class="d2 ico2">
-      {dede:arclist flag='a' row='6' orderby='pubdate'}
-      <li><span>[field:pubdate function="MyDate('m-d',@me)"/]</span><a href="[field:arcurl/]">[field:title/]</a></li>
-      {/dede:arclist}
-     </ul>
-    </dd>
-   </dl>
-  </div>
-  <!-- /latestnews -->
-  <div class="picnews">
-   <dl class="tbox light">
-    <dt class='light'><strong>图文资讯</strong></dt>
-    <dd class='light'>
-     <div class="infiniteCarousel">
-      <div class="wrapper">
-       <ul id='imgscroll'>
-        {dede:arclist row=10 orderby=pubdate type='image.' imgwidth='143' imgheight='106'}
-        <li><a href="[field:arcurl/]">[field:image/]<span class="title">[field:title/]</span></a></li>
-        {/dede:arclist}
-       </ul>
-      </div>
-     </div>
-    </dd>
-   </dl>
-  </div>
-  <div id="leftAD1" style="margin:10px auto">{dede:mda name='700x90'/}</div>
-  <!-- /picnews -->
-  <div class="listbox"> {dede:channelartlist}
-   <dl class="tbox">
-    <dt><strong><a href="{dede:field name='typeurl'/}">{dede:field name='typename'/}</a></strong><span class="more"><a href="{dede:field name='typeurl'/}">更多...</a></span></dt>
-    <dd>
-     <ul class="d1 ico3">
-      {dede:arclist titlelen='60' row='8'}
-      <li><span>[field:pubdate function="MyDate('m-d',@me)"/]</span><a href="[field:arcurl /]">[field:title /]</a></li>
-      {/dede:arclist}
-     </ul>
-    </dd>
-   </dl>
-   {/dede:channelartlist} </div>
-  <!-- /listbox -->
- </div>
- <!-- /pleft -->
- <div class="pright">
-  <div class="usercenter">
-   <dl class="tbox light">
-    <dt class='light'> <strong>互动中心</strong> <span class="label"> <a href="#" _for="uc_digg">踩踩</a> <a href="#" _for="uc_comment">评论</a> <a href="#" _for="uc_member">会员</a> </span> </dt>
-    <dd id="loading"> 正在载入,请稍候... </dd>
-    <dd id="uc_digg">
-     <ul class="f1">
-      {dede:arclist orderby='scores' row='8' subday='30' titlelen='42'}
-      <li> <a href="[field:arcurl/]">[field:title/]</a> <span><small>点击:</small>[field:click/]</span> <span><small>评价:</small>[field:scores/]</span></li>
-      {/dede:arclist}
-     </ul>
-    </dd>
-    <!-- /uc_digg -->
-    <dd id="uc_comment">
-     <ul class="f2">
-      {dede:feedback row='5' titlelen='24' infolen='80'}
-      <li> <small><a href="#" class="username">[field:username function="(@me=='guest' ? '游客' : @me)"/]</a> 评论 <a href="[field:global.cfg_phpurl/]/feedback.php?aid=[field:aid/]" class="title">[field:title/]</a></small>
-       <p>[field:msg/]</p>
-      </li>
-      {/dede:feedback}
-     </ul>
-    </dd>
-    <!-- /uc_comment -->
-    <dd id="uc_member" >
-     <div id="_userlogin">
-      <div class="userlogin">
-       <form name="userlogin" action="{dede:global.cfg_memberurl/}/index_do.php" method="POST">
-        <input type="hidden" name="fmdo" value="login" />
-        <input type="hidden" name="dopost" value="login" />
-        <input type="hidden" name="keeptime" value="604800" />
-        <div class="fb"><span>用户名:</span>
-         <input type="text" name="userid" size="20" class="ipt-txt" />
-        </div>
-        <div class="fb"><span>密码:</span>
-         <input type="password" name="pwd" size="20" class="ipt-txt" />
-        </div>
-        {dede:php}
-        if(preg_match("#2#", $safe_gdopen))
-        {
-        echo '
-        <div class="fb"><span>验证码:</span>
-         <input type="text" name="vdcode" size="8" class="ipt-txt" />
-         <img id="vdimgck" align="absmiddle" onClick="this.src=this.src+\'?\'" style="cursor:pointer;margin-left:0px;text-transform:uppercase;" alt="看不清？点击更换" src="'.$cfg_cmspath.'/include/vdimgck.php"/></div>
-        ';
-        }
-        {/dede:php}
-        <div class="submit">
-         <button type="submit" class="btn-1">登录</button>
-         <a href="{dede:global.cfg_memberurl/}/index_do.php?fmdo=user&dopost=regnew" >注册帐号</a> <a href="{dede:global.cfg_memberurl/}/resetpassword.php">忘记密码?</a> </div>
-       </form>
-      </div>
-     </div>
-     <!-- /userlogin -->
-     <script language="javascript" type="text/javascript">CheckLogin();</script>
-     <div class="latestlogin"> <strong>最近登陆的会员</strong>
-      <ul class="e7">
-       {dede:memberlist row=6 signlen=30}
-       <li><a href="[field:spaceurl/]" target="_blank"><img src="[field:face/]" alt='[field:spacename/]' width="52" height="52" />[field:uname/]</a></li>
-       {/dede:memberlist}
-      </ul>
-     </div>
-     <!-- /latestlogin -->
-    </dd>
-    <!-- /uc_member -->
-   </dl>
-  </div>
-  <!-- /usercenter -->
-  <div id="rightAD1" style="margin:10px auto">{dede:mda name='250x250_SSP'/}</div>
-  <div class="commend mt1">
-   <dl class="tbox light">
-    <dt class='light'><strong>推荐内容</strong></dt>
-    <dd class='light'>
-     <ul class="c1 ico2">
-      {dede:arclist flag='c' titlelen=42 row='16' tagid='dedecms' pagesize='8'}
-      <li class='dotline'><a href="[field:arcurl/]">[field:title/]</a></li>
-      {/dede:arclist}
-     </ul>
-    </dd>
-   </dl>
-  </div>
-  <!-- /commend -->
-  <div id="rightAD1" style="margin:10px auto">{dede:mda name='250x250'/}</div>
-  <div class="hot mt1">
-   <dl class="tbox light">
-    <dt class='light'><strong>本月热点</strong></dt>
-    <dd class='light'>
-     <ul class="c1 ico2">
-      {dede:arclist sort='hot' subday='30' titlelen=42 row=6}
-      <li class='dotline'><a href="[field:arcurl/]">[field:title/]</a></li>
-      {/dede:arclist}
-     </ul>
-    </dd>
-   </dl>
-  </div>
-  <div class="vote mt1">
-   <dl class="tbox light">
-    <dt class='light'><strong>投票调查</strong></dt>
-    <script language="javascript" src="{dede:global.cfg_cmsurl/}/data/vote/vote_1.js"></script>
-   </dl>
-  </div>
-  <!-- /vote -->
-  {dede:qrcode/}
-  
- </div>
- <!-- /pleft -->
-</div>
-<div class="flink w960 center clear">
- <dl class="tbox">
-  <dt> <strong>友情链接</strong>
-	<span class="linklabel">
-		{dede:flinktype type="dedecms"}
-			<a href="#" _for="flink_[field:id/]">[field:typename/]</a> 
-		{/dede:flinktype}
-	</span>
-	<span class="more"> <a href="plus/flink.php">所有链接</a> | <a href="plus/flink_add.php">申请加入</a> </span> </dt>
-  {dede:flinktype type="dedecms"}
-  <dd id="flink_[field:id/]">
-    <ul class="f5">
-		{dede:flink/}
-    </ul>
-  </dd>
-  {/dede:flinktype}
- </dl>
-</div>
-<!-- /flink -->
-<div id="footAD" style="margin:10px auto; width:726px">{dede:mda name='728x90'/}</div>
-{dede:include filename="footer.htm"/}
-<!-- /footer -->
+
+<body class="page-type-index">
+	<div class="wrap">
+		<div id="header">
+			<div class="header">
+				<div class="header-in" cms-node-type="dnd">
+					<h1 class="logo-box">
+						<a href="#" target="_blank">
+							<img src="http://ue1.17173cdn.com/a/lib/logo/news.png" width="130" height="69" alt="">
+						</a>
+					</h1>
+					<div class="menu-box">
+						<a href="http://news.17173.com/top/" target="_blank">排行</a>
+						<a href="http://news.17173.com/main/no1.shtml" target="_blank">大陆</a>
+						<a href="http://news.17173.com/main/no2.shtml" target="_blank">全球</a>
+						<a href="http://news.17173.com/chanye/list.shtml" target="_blank">产业</a>
+					</div>
+					<div class="search-box">
+						<div class="search-form">
+							<form action="http://search.17173.com/jsp/news.jsp" target="_blank">
+								<input type="text" class="keyword" name="keyword" value="">
+								<button type="submit">
+									<i class="ico ico-search"></i>
+								</button>
+							</form>
+						</div>
+					</div>
+					<div class="code-box">
+						<img src="//ue.17173cdn.com/a/news/index/2017/img/code.jpg" width="90" height="90" alt="">
+					</div>
+				</div>
+			</div>
+			<div class="nav">
+				<ul class="nav-list">
+					<li>
+						<a href="https://www.17173.com/" target="_blank">17173首页</a>
+					</li>
+					<li>
+						<a href="http://news.17173.com/game/jtj.shtml" target="_blank">囧图集</a>
+					</li>
+					<li>
+						<a href="http://news.17173.com/game/yzdzh.shtml" target="_blank">一周大杂烩</a>
+					</li>
+					<li>
+						<a href="http://news.17173.com/lzs/lzs.shtml" target="_blank">冷知识</a>
+					</li>
+					<li>
+						<a href="http://news.17173.com/wjhyl/wjhyl.shtml" target="_blank">玩家回忆录</a>
+					</li>
+					<li>
+						<a href="http://news.17173.com/gameview/cos/" target="_blank">Cosplay</a>
+					</li>
+					<li>
+						<a href="http://news.17173.com/game/dbs.shtml" target="_blank">大B神脱口秀</a>
+					</li>
+					<li>
+						<a href="http://news.17173.com/game/djstkx.shtml" target="_blank">大J神脱口秀</a>
+					</li>
+					<li>
+						<a href="http://news.17173.com/game/nht.shtml" target="_blank">内涵图</a>
+					</li>
+					<li>
+						<a href="http://news.17173.com/sjtc/bflrsjtc.shtml" target="_blank">吐槽集</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- end.header -->
+		<div class="content">
+			<div class="main">
+				<div id="mainList" data-ids="10019,10152,10161">
+					<div class="hd">
+						<h2 class="tit">今日要闻</h2>
+					</div>
+					<div class="bd">
+						<ul class="ptlist ptlist-news adNewsIndexYaoWen">
+
+							<li class="item" data-key="10216378_1_10009">
+								<div class="item-con">
+
+
+									<div class="pic">
+										<a href="http://news.17173.com/content/10292017/223252620.shtml" target="_blank" class="avatar">
+											<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/oMXMUhblDuiBuid.png!a-3-240x.jpg" width="160" height="120" alt="" />
+										</a>
+									</div>
+
+
+									<div class="text">
+										<h2 class="tit">
+											<a href="http://news.17173.com/content/10292017/223252620.shtml" target="_blank">3D古风换装手游《云裳羽衣》正式发布 11月首测</a>
+										</h2>
+										<div class="info">
+											<div class="c1" data-gameCodes=""></div>
+											<div class="c2">
+												<span class="date">
+													<i class="ico ico-date"></i>10-29
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="item" data-key="10216377_1_10009">
+								<div class="item-con">
+
+
+									<div class="pic">
+										<a href="http://news.17173.com/content/10292017/223036105.shtml" target="_blank" class="avatar">
+											<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/tTrblEblDuixaAd.png!a-3-240x.jpg" width="160" height="120" alt="" />
+										</a>
+									</div>
+
+
+									<div class="text">
+										<h2 class="tit">
+											<a href="http://news.17173.com/content/10292017/223036105.shtml" target="_blank">风起稻香,映雪相逢 《剑网3:指尖江湖》12月首测</a>
+										</h2>
+										<div class="info">
+											<div class="c1" data-gameCodes=""></div>
+											<div class="c2">
+												<span class="date">
+													<i class="ico ico-date"></i>10-29
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="item" data-key="10216376_1_10009">
+								<div class="item-con">
+
+
+									<div class="pic">
+										<a href="http://news.17173.com/content/10292017/222717786.shtml" target="_blank" class="avatar">
+											<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/qevscCblDuisadn.png!a-3-240x.jpg" width="160" height="120" alt="" />
+										</a>
+									</div>
+
+
+									<div class="text">
+										<h2 class="tit">
+											<a href="http://news.17173.com/content/10292017/222717786.shtml" target="_blank">剑侠系列首款虚幻4引擎RPG《剑侠情缘2：剑歌行》正式发布</a>
+										</h2>
+										<div class="info">
+											<div class="c1" data-gameCodes=""></div>
+											<div class="c2">
+												<span class="date">
+													<i class="ico ico-date"></i>10-29
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="item" data-key="10216348_1_10009">
+								<div class="item-con">
+
+
+									<div class="pic">
+										<a href="http://news.17173.com/content/10292017/200215899.shtml" target="_blank" class="avatar">
+											<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/news/sy/uHxWMsblDuapfmF.jpg!a-3-240x.jpg" width="160" height="120" alt=""
+											/>
+										</a>
+									</div>
+
+
+									<div class="text">
+										<h2 class="tit">
+											<a href="http://news.17173.com/content/10292017/200215899.shtml" target="_blank">妈祖加入诸神之战 这个“神仙打架”的游戏脑洞太大了</a>
+										</h2>
+										<div class="info">
+											<div class="c1" data-gameCodes=""></div>
+											<div class="c2">
+												<span class="date">
+													<i class="ico ico-date"></i>10-29
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="item" data-key="10216342_1_10009">
+								<div class="item-con">
+
+
+									<div class="pic">
+										<a href="http://news.17173.com/content/10292017/161133965.shtml" target="_blank" class="avatar">
+											<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/PvBURHblDttsccd.png!a-3-240x.jpg" width="160" height="120" alt="" />
+										</a>
+									</div>
+
+
+									<div class="text">
+										<h2 class="tit">
+											<a href="http://news.17173.com/content/10292017/161133965.shtml" target="_blank">一周神评论：请问宣告打女友带的什么天赋？顺便告诉我一下符文</a>
+										</h2>
+										<div class="info">
+											<div class="c1" data-gameCodes=""></div>
+											<div class="c2">
+												<span class="date">
+													<i class="ico ico-date"></i>10-29
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="item" data-key="10216333_1_10009">
+								<div class="item-con">
+
+
+									<div class="pic">
+										<a href="http://news.17173.com/content/10292017/155912142_1.shtml" target="_blank" class="avatar">
+											<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/RjHTgjblDttcapc.gif!a-3-240x.jpg" width="160" height="120" alt="" />
+										</a>
+									</div>
+
+
+									<div class="text">
+										<h2 class="tit">
+											<a href="http://news.17173.com/content/10292017/155912142_1.shtml" target="_blank">单机周报：刺客信条正式发售！星际公民新演示轰动全场</a>
+										</h2>
+										<div class="info">
+											<div class="c1" data-gameCodes=""></div>
+											<div class="c2">
+												<span class="date">
+													<i class="ico ico-date"></i>10-29
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="item" data-key="10216318_1_10009">
+								<div class="item-con">
+
+									<div class="pic">
+										<a href="http://news.17173.com/content/10292017/111456895.shtml" target="_blank" class="avatar">
+											<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/LeXyJsblDtbuuzq.jpg!a-3-240x.jpg" width="160" height="120" alt="" />
+										</a>
+									</div>
+
+									<div class="text">
+										<h2 class="tit">
+											<a href="http://news.17173.com/content/10292017/111456895.shtml" target="_blank">这款腾讯投资的游戏里，你能找到最终幻想、勇者斗恶龙还有天之痕的感觉</a>
+										</h2>
+										<div class="info">
+											<div class="c1" data-gameCodes=""></div>
+											<div class="c2">
+												<span class="date">
+													<i class="ico ico-date"></i>10-29
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="item" data-key="10216316_1_10009">
+								<div class="item-con">
+
+									<div class="pic">
+										<a href="http://news.17173.com/content/10292017/091645736_1.shtml" target="_blank" class="avatar">
+											<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/hnBepUblDsCisrF.jpg!a-3-240x.jpg" width="160" height="120" alt="囧图集：好奶的狗"
+											/>
+										</a>
+									</div>
+
+									<div class="text">
+										<h2 class="tit">
+											<a href="http://news.17173.com/content/10292017/091645736_1.shtml" target="_blank">一看吓一跳：雷死人不偿命的囧图集(346)</a>
+										</h2>
+										<div class="info">
+											<div class="c1" data-gameCodes=""></div>
+											<div class="c2">
+												<span class="date">
+													<i class="ico ico-date"></i>10-29
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="item" data-key="10216315_1_10009">
+								<div class="item-con">
+
+
+									<div class="pic">
+										<a href="http://news.17173.com/content/10292017/074516119.shtml" target="_blank" class="avatar">
+											<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/QSyfKmblDswbgzk.gif!a-3-240x.jpg" width="160" height="120" alt="" />
+										</a>
+									</div>
+
+
+									<div class="text">
+										<h2 class="tit">
+											<a href="http://news.17173.com/content/10292017/074516119.shtml" target="_blank">热游情报:吃鸡好评率不足37% 暴雪越来越像腾讯</a>
+										</h2>
+										<div class="info">
+											<div class="c1" data-gameCodes=""></div>
+											<div class="c2">
+												<span class="date">
+													<i class="ico ico-date"></i>10-29
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="item" data-key="10216314_1_10009">
+								<div class="item-con">
+
+
+									<div class="pic">
+										<a href="http://news.17173.com/content/10292017/074515360_1.shtml" target="_blank" class="avatar">
+											<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/eIsymrblDsvCeze.jpg!a-3-240x.jpg" width="160" height="120" alt="" />
+										</a>
+									</div>
+
+
+									<div class="text">
+										<h2 class="tit">
+											<a href="http://news.17173.com/content/10292017/074515360_1.shtml" target="_blank">有喜欢的周边吗？2017暴雪嘉年华精美周边赏</a>
+										</h2>
+										<div class="info">
+											<div class="c1" data-gameCodes=""></div>
+											<div class="c2">
+												<span class="date">
+													<i class="ico ico-date"></i>10-29
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="item" data-key="10216313_1_10009">
+								<div class="item-con">
+
+
+									<div class="pic">
+										<a href="http://news.17173.com/content/10292017/074230943_1.shtml" target="_blank" class="avatar">
+											<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/zbahvcblDsvCggq.jpg!a-3-240x.jpg" width="160" height="120" alt="" />
+										</a>
+									</div>
+
+
+									<div class="text">
+										<h2 class="tit">
+											<a href="http://news.17173.com/content/10292017/074230943_1.shtml" target="_blank">一周全球新闻回顾：国产手游成功逆袭韩国</a>
+										</h2>
+										<div class="info">
+											<div class="c1" data-gameCodes=""></div>
+											<div class="c2">
+												<span class="date">
+													<i class="ico ico-date"></i>10-29
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="item" data-key="10216312_1_10009">
+								<div class="item-con">
+
+
+									<div class="pic">
+										<a href="http://news.17173.com/content/10292017/073933774.shtml" target="_blank" class="avatar">
+											<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/ynXEpoblDsvoxaC.jpg!a-3-240x.jpg" width="160" height="120" alt="" />
+										</a>
+									</div>
+
+
+									<div class="text">
+										<h2 class="tit">
+											<a href="http://news.17173.com/content/10292017/073933774.shtml" target="_blank">亡人村的血泪《仙侠世界2》决战炼狱岛</a>
+										</h2>
+										<div class="info">
+											<div class="c1" data-gameCodes="1000555"></div>
+											<div class="c2">
+												<span class="date">
+													<i class="ico ico-date"></i>10-29
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="item" data-key="10216311_1_10009">
+								<div class="item-con">
+
+
+									<div class="pic">
+										<a href="http://news.17173.com/content/10292017/073843487.shtml" target="_blank" class="avatar">
+											<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/sqALkhblDsvouew.jpg!a-3-240x.jpg" width="160" height="120" alt="" />
+										</a>
+									</div>
+
+
+									<div class="text">
+										<h2 class="tit">
+											<a href="http://news.17173.com/content/10292017/073843487.shtml" target="_blank">大佬作品秀《艾尔之光》精美同人绘</a>
+										</h2>
+										<div class="info">
+											<div class="c1" data-gameCodes="10410"></div>
+											<div class="c2">
+												<span class="date">
+													<i class="ico ico-date"></i>10-29
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="item" data-key="10216284_3_10009">
+								<div class="item-con">
+
+
+
+									<div class="text">
+										<h2 class="tit">
+											<a href="http://news.17173.com/live/zt/2017/1029jxqy/01/index.shtml" target="_blank">腾讯携手西山居共推四款剑侠情缘手游</a>
+										</h2>
+										<div class="info">
+											<div class="c1" data-gameCodes=""></div>
+											<div class="c2">
+												<span class="date">
+													<i class="ico ico-date"></i>10-29
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="item" data-key="10216286_1_10009">
+								<div class="item-con">
+
+
+									<div class="pic">
+										<a href="http://news.17173.com/content/10292017/060004328_1.shtml" target="_blank" class="avatar">
+											<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/kcLgQhblDrszldh.jpg!a-3-240x.jpg" width="160" height="120" alt="" />
+										</a>
+									</div>
+
+
+									<div class="text">
+										<h2 class="tit">
+											<a href="http://news.17173.com/content/10292017/060004328_1.shtml" target="_blank">综述：绝地求生国服要凉？游戏主管部门对大逃杀持否定态度</a>
+										</h2>
+										<div class="info">
+											<div class="c1" data-gameCodes=""></div>
+											<div class="c2">
+												<span class="date">
+													<i class="ico ico-date"></i>10-29
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="item" data-key="10216298_1_10009">
+								<div class="item-con">
+
+
+									<div class="pic">
+										<a href="http://news.17173.com/content/10292017/050719843_1.shtml" target="_blank" class="avatar">
+											<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/xFOfUlblDrwDCeF.gif!a-3-240x.jpg" width="160" height="120" alt="" />
+										</a>
+									</div>
+
+
+									<div class="text">
+										<h2 class="tit">
+											<a href="http://news.17173.com/content/10292017/050719843_1.shtml" target="_blank">LOL周报:RNG惜败SKT 死亡宣告打女友被禁赛</a>
+										</h2>
+										<div class="info">
+											<div class="c1" data-gameCodes="10898"></div>
+											<div class="c2">
+												<span class="date">
+													<i class="ico ico-date"></i>10-29
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="item" data-key="10216305_1_10009">
+								<div class="item-con">
+
+
+									<div class="pic">
+										<a href="http://news.17173.com/content/10292017/020528624_1.shtml" target="_blank" class="avatar">
+											<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/DRbBeTblDsbbaho.jpg!a-3-240x.jpg" width="160" height="120" alt="" />
+										</a>
+									</div>
+
+
+									<div class="text">
+										<h2 class="tit">
+											<a href="http://news.17173.com/content/10292017/020528624_1.shtml" target="_blank">江湖周报:剑网3重制版11月1日二测 腾讯一次拿下西山居四款武侠游戏</a>
+										</h2>
+										<div class="info">
+											<div class="c1" data-gameCodes=""></div>
+											<div class="c2">
+												<span class="date">
+													<i class="ico ico-date"></i>10-29
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="item" data-key="10216261_1_10009">
+								<div class="item-con">
+
+
+									<div class="pic">
+										<a href="http://news.17173.com/content/10282017/105952484.shtml" target="_blank" class="avatar">
+											<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/QaUCPSblDqoBhCd.jpg!a-3-240x.jpg" width="160" height="120" alt="！" />
+										</a>
+									</div>
+
+
+									<div class="text">
+										<h2 class="tit">
+											<a href="http://news.17173.com/content/10282017/105952484.shtml" target="_blank">神秘大礼送不停 《创世神话》新服今日震撼开启</a>
+										</h2>
+										<div class="info">
+											<div class="c1" data-gameCodes="11872"></div>
+											<div class="c2">
+												<span class="date">
+													<i class="ico ico-date"></i>10-28
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="item" data-key="10216256_1_10009">
+								<div class="item-con">
+
+
+									<div class="pic">
+										<a href="http://news.17173.com/content/10282017/103851818.shtml" target="_blank" class="avatar">
+											<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/dDPdTFblDqnynbe.png!a-3-240x.jpg" width="160" height="120" alt="" />
+										</a>
+									</div>
+
+
+									<div class="text">
+										<h2 class="tit">
+											<a href="http://news.17173.com/content/10282017/103851818.shtml" target="_blank">完美世界发布2017新财报 Q1-Q3营收55亿同比增55.96％</a>
+										</h2>
+										<div class="info">
+											<div class="c1" data-gameCodes=""></div>
+											<div class="c2">
+												<span class="date">
+													<i class="ico ico-date"></i>10-28
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="item" data-key="10216252_1_10009">
+								<div class="item-con">
+
+
+									<div class="pic">
+										<a href="http://news.17173.com/content/10282017/080302102_1.shtml" target="_blank" class="avatar">
+											<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/ytfVWJblDqevqad.gif!a-3-240x.jpg" width="160" height="120" alt="" />
+										</a>
+									</div>
+
+
+									<div class="text">
+										<h2 class="tit">
+											<a href="http://news.17173.com/content/10282017/080302102_1.shtml" target="_blank">《命运2》为何能被暴雪看中?我隐隐作痛的肝就是答案</a>
+										</h2>
+										<div class="info">
+											<div class="c1" data-gameCodes="1000624"></div>
+											<div class="c2">
+												<span class="date">
+													<i class="ico ico-date"></i>10-28
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+						</ul>
+						<ul class="ptlist ptlist-news" data-role="list">
+							<script type="text/x-handlebars">
+                [[#each list]]
+                    <li class="item" data-key="">
+                        <div class="item-con">
+                            [[#if imgPath]]
+                              <div class="pic">
+                                <a href="[[pageUrl]]" target="_blank" class="avatar">
+                                <img src="[[removeMagic imgPath]]!a-3-240x.jpg" width="160" height="120" alt="[[imgTitle]]" />
+                                </a>
+                              </div>
+                            [[else]]
+                              [[#if imageList]]
+                              <div class="pic">
+                                <a href="[[pageUrl]]" target="_blank"  class="avatar">
+                                <img src="[[getImg '' true]]!a-3-240x.jpg" width="160" height="120" alt="[[imgTitle]]" />
+                                </a>
+                              </div>
+                              [[/if]]
+                            [[/if]]
+                            <div class="text">
+                                <h2 class="tit"><a href="[[pageUrl]]" target="_blank" >[[title]]</a></h2>
+                                <div class="info">
+                                    <div class="c1" data-gameCodes="[[oldGameCodes]]"></div>
+                                    <div class="c2">
+                                        <span class="date">
+                                            <i class="ico ico-date"></i>[[dateFormat publishTime 'm-d']]
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                [[/each]]
+            </script>
+						</ul>
+
+						<a href="javascript:;" data-role="more" class="btn-more">查看更多精彩内容</a>
+
+					</div>
+				</div>
+
+			</div>
+			<!-- end.main -->
+			<div class="side">
+				<div class="focus">
+					<div class="focus-in">
+						<ul style="display: none" data-ui-mark="data" id="mainFocus">
+							<li>
+								<a class="img-target" href="{{url}}" data-ui-data="link">
+									<img src="//ue.17173cdn.com/a/www/index/2016/img/lazyloadplaceholder.gif" data-ui-data="img" data-src="//images.17173cdn.com/2017/www/bigeye/2017/10/y20171029main_a.jpg"
+									 alt="" />
+								</a>
+								<img src="//ue.17173cdn.com/a/www/index/2016/img/lazyloadplaceholder.gif" data-ui-data="thumb" data-src="//images.17173cdn.com/2017/www/bigeye/2017/10/y20171029main_es.jpg"
+								 alt="" />
+								<div class="label">
+									<h2 class="title" data-ui-data="title">标题11</h2>
+									<h3 class="desc" data-ui-data="desc">描述</h3>
+								</div>
+							</li>
+							<li>
+								<a class="img-target" href="{{url}}" data-ui-data="link">
+									<img src="//ue.17173cdn.com/a/www/index/2016/img/lazyloadplaceholder.gif" data-ui-data="img" data-src="//images.17173cdn.com/2017/www/bigeye/2017/10/y20171029main_a.jpg"
+									 alt="" />
+								</a>
+								<img src="//ue.17173cdn.com/a/www/index/2016/img/lazyloadplaceholder.gif" data-ui-data="thumb" data-src="//images.17173cdn.com/2017/www/bigeye/2017/10/y20171029main_es.jpg"
+								 alt="" />
+								<div class="label">
+									<h2 class="title" data-ui-data="title">标题22</h2>
+									<h3 class="desc" data-ui-data="desc">描述</h3>
+								</div>
+							</li>
+							<li>
+								<a class="img-target" href="{{url}}" data-ui-data="link">
+									<img src="//ue.17173cdn.com/a/www/index/2016/img/lazyloadplaceholder.gif" data-ui-data="img" data-src="//images.17173cdn.com/2017/www/bigeye/2017/10/y20171029main_a.jpg"
+									 alt="" />
+								</a>
+								<img src="//ue.17173cdn.com/a/www/index/2016/img/lazyloadplaceholder.gif" data-ui-data="thumb" data-src="//images.17173cdn.com/2017/www/bigeye/2017/10/y20171029main_es.jpg"
+								 alt="" />
+								<div class="label">
+									<h2 class="title" data-ui-data="title">标题33</h2>
+									<h3 class="desc" data-ui-data="desc">描述</h3>
+								</div>
+							</li>
+						</ul>
+						<div class="focus-con">
+							<div class="focus-con-item" data-ui-mark="imageContainer">
+								<P class="img-box">
+									<a href="javascript:;" target="_blank" data-ui-mark="link">
+										<img src="http://ue2.17173.itc.cn/a/www/index/2013/images/lazyloadplaceholder.gif" width=365 height=395 data-ui-mark="img"
+										 alt="">
+									</a>
+								</P>
+								<div class="txt-box">
+									<h2 class="tit">
+										<a href="javascript:;" target="_blank" data-ui-mark="title"></a>
+									</h2>
+									<p class="detail">
+										<a href="javascript:;" target="_blank" data-ui-mark="desc"></a>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="focus-fun">
+							<div class="focus-thumb" data-ui-mark="thumbsbox">
+								<div class="focus-thumb-in">
+									<div class="focus-thumb-box" data-ui-mark="thumbs">
+										<P class="focus-thumb-item">
+											<a class="setlink-keyword" href="javascript:;">
+												<img src="http://ue2.17173.itc.cn/a/www/index/2013/images/lazyloadplaceholder.gif" width="119" height="80" alt="">
+											</a>
+										</P>
+										<P class="focus-thumb-item">
+											<a class="setlink-keyword" href="javascript:;">
+												<img src="http://ue2.17173.itc.cn/a/www/index/2013/images/lazyloadplaceholder.gif" width="119" height="80" alt=""> </a>
+										</P>
+										<P class="focus-thumb-item">
+											<a class="setlink-keyword" href="javascript:;">
+												<img src="http://ue2.17173.itc.cn/a/www/index/2013/images/lazyloadplaceholder.gif" width="119" height="80" alt="">
+											</a>
+										</P>
+										<P class="focus-thumb-item">
+											<a class="setlink-keyword" href="javascript:;">
+												<img src="http://ue2.17173.itc.cn/a/www/index/2013/images/lazyloadplaceholder.gif" width="119" height="80" alt="">
+											</a>
+										</P>
+									</div>
+								</div>
+							</div>
+							<div class="focus-num">
+								<span class="current" data-ui-mark="index"></span>/
+								<span class="num" data-ui-mark="length"></span>
+							</div>
+							<a class="btn-focus btn-focus-prev" href="javascript:;" data-ui-mark="prev"></a>
+							<a class="btn-focus btn-focus-next" href="javascript:;" data-ui-mark="next"></a>
+						</div>
+					</div>
+				</div>
+				<div class="rec-reading">
+					<div class="hd">
+						<h2 class="tit">推荐阅读</h2>
+					</div>
+					<div class="bd">
+						<ul class="ptlist ptlist-reading">
+
+							<li class="item">
+								<a href="http://news.17173.com/content/10292017/060004328_1.shtml" target="_blank" class="item-con">
+									<i class="line"></i>
+									<div class="pic">
+
+
+										<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/kcLgQhblDrszldh.jpg!a-3-240x.jpg" width="100" height="75" alt="" />
+
+
+									</div>
+									<div class="text">
+										<h3 class="tit">综述：绝地求生国服要凉？游戏主管部门对大逃杀持否定态度</h3>
+										<p class="dec"> 绝地求生 - 幻 - 崩坏3 </p>
+									</div>
+								</a>
+							</li>
+
+							<li class="item">
+								<a href="http://news.17173.com/content/10222017/213601456.shtml" target="_blank" class="item-con">
+									<i class="line"></i>
+									<div class="pic">
+
+										<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/mwaCutblDdnvBmu.png!a-3-240x.jpg" width="100" height="75" alt="WE击败C9晋级四强"
+										/>
+
+									</div>
+									<div class="text">
+										<h3 class="tit">WE击败C9晋级四强会师RNG，网友：半决赛不敢看，怕心脏受不了！</h3>
+										<p class="dec"> 英雄联盟 - S7 - WE战队 </p>
+									</div>
+								</a>
+							</li>
+
+							<li class="item">
+								<a href="http://news.17173.com/content/10222017/080856125_1.shtml" target="_blank" class="item-con">
+									<i class="line"></i>
+									<div class="pic">
+
+
+										<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/gNqwCmblDaCmdaC.jpg!a-3-240x.jpg" width="100" height="75" alt="" />
+
+
+									</div>
+									<div class="text">
+										<h3 class="tit">综述：韩国人慌了！本土市场正被中国游戏攻占</h3>
+										<p class="dec"> v社 - g胖 - 绝地求生 </p>
+									</div>
+								</a>
+							</li>
+
+							<li class="item">
+								<a href="http://news.17173.com/content/10152017/060013306_1.shtml" target="_blank" class="item-con">
+									<i class="line"></i>
+									<div class="pic">
+
+
+										<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/ziSDNsblCmtvBiq.jpg!a-3-240x.jpg" width="100" height="75" alt="" />
+
+
+									</div>
+									<div class="text">
+										<h3 class="tit">综述：暴雪网易起诉4399，两款手游涉嫌抄袭守望先锋</h3>
+										<p class="dec"></p>
+									</div>
+								</a>
+							</li>
+
+							<li class="item">
+								<a href="http://news.17173.com/content/10092017/174959554.shtml" target="_blank" class="item-con">
+									<i class="line"></i>
+									<div class="pic">
+
+										<img src="http://i.17173cdn.com/2fhnvk/YWxqaGBf/cms3/eeyRNFblCajnCkD.png!a-3-240x.jpg" width="100" height="75" alt="王者荣耀推新模式"
+										/>
+
+									</div>
+									<div class="text">
+										<h3 class="tit">手残的玩家再也不怕被举报了，王者荣耀将推新模式让小学生浪个够</h3>
+										<p class="dec"> 王者荣耀 - 新模式 </p>
+									</div>
+								</a>
+							</li>
+
+						</ul>
+					</div>
+				</div>
+				<!-- end.red-reading -->
+				<div class="hao-welfare">
+					<div class="hd">
+						<h2 class="tit">发号福利</h2>
+						<div class="more">
+							<a href="http://hao.17173.com/" target="_blank">更多»</a>
+						</div>
+					</div>
+					<div class="bd js-tab">
+						<ul class="tab">
+							<li>
+								<a href="javascript:;">网游</a>
+							</li>
+							<li>
+								<a href="javascript:;">手游</a>
+							</li>
+							<li>
+								<a href="javascript:;">页游</a>
+							</li>
+						</ul>
+						<div class="tab-pn">
+							<div>
+								<ul class="list">
+
+									<li class="item">
+										<a href="http://hao.17173.com/gift-info-41627.html" target="_blank" class="art-item">
+											<span class="date">10-27</span>
+											<div class="tit">
+												<span class="game">梦想世界 &#183;</span>
+												<span class="gift">龙腾虎跃版礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.17173.com/gift-info-41620.html" target="_blank" class="art-item">
+											<span class="date">10-26</span>
+											<div class="tit">
+												<span class="game">影武者 &#183;</span>
+												<span class="gift">甜蜜梦幻礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.17173.com/gift-info-41619.html" target="_blank" class="art-item">
+											<span class="date">10-26</span>
+											<div class="tit">
+												<span class="game">坦克世界 &#183;</span>
+												<span class="gift">超级征服者礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.17173.com/gift-info-41618.html" target="_blank" class="art-item">
+											<span class="date">10-26</span>
+											<div class="tit">
+												<span class="game">Cabal1.5 &#183;</span>
+												<span class="gift">17173独家礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.17173.com/gift-info-41615.html" target="_blank" class="art-item">
+											<span class="date">10-26</span>
+											<div class="tit">
+												<span class="game">极品飞车OL &#183;</span>
+												<span class="gift">17173高级礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.17173.com/gift-info-41614.html" target="_blank" class="art-item">
+											<span class="date">10-26</span>
+											<div class="tit">
+												<span class="game">极品飞车OL &#183;</span>
+												<span class="gift">17173独家礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.17173.com/gift-info-41565.html" target="_blank" class="art-item">
+											<span class="date">10-25</span>
+											<div class="tit">
+												<span class="game">新风云 &#183;</span>
+												<span class="gift">独家“绝世好剑”限量礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.17173.com/gift-info-41564.html" target="_blank" class="art-item">
+											<span class="date">10-25</span>
+											<div class="tit">
+												<span class="game">神雕侠侣 &#183;</span>
+												<span class="gift">那年花开新手礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.17173.com/gift-info-41563.html" target="_blank" class="art-item">
+											<span class="date">10-25</span>
+											<div class="tit">
+												<span class="game">自由禁区 &#183;</span>
+												<span class="gift">创客不删档激活码</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.17173.com/gift-info-41555.html" target="_blank" class="art-item">
+											<span class="date">10-25</span>
+											<div class="tit">
+												<span class="game">笑傲江湖ol &#183;</span>
+												<span class="gift">17173大逃杀专享献礼</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+								</ul>
+							</div>
+							<div style="display:none">
+								<ul class="list">
+
+									<li class="item">
+										<a href="http://hao.17173.com/gift-info-41631.html" target="_blank" class="art-item">
+											<span class="date">10-27</span>
+											<div class="tit">
+												<span class="game">荒野行动 &#183;</span>
+												<span class="gift">先锋测试激活码</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.17173.com/gift-info-41630.html" target="_blank" class="art-item">
+											<span class="date">10-27</span>
+											<div class="tit">
+												<span class="game">西游诀 &#183;</span>
+												<span class="gift">17173重阳节礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.17173.com/gift-info-41629.html" target="_blank" class="art-item">
+											<span class="date">10-27</span>
+											<div class="tit">
+												<span class="game">终结者2：审判日 &#183;</span>
+												<span class="gift">双端测试激活码</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.17173.com/gift-info-41628.html" target="_blank" class="art-item">
+											<span class="date">10-27</span>
+											<div class="tit">
+												<span class="game">梦想世界 &#183;</span>
+												<span class="gift">绝世武学礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.17173.com/gift-info-41621.html" target="_blank" class="art-item">
+											<span class="date">10-26</span>
+											<div class="tit">
+												<span class="game">御龙在天手游 &#183;</span>
+												<span class="gift">特权礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.17173.com/gift-info-41617.html" target="_blank" class="art-item">
+											<span class="date">10-26</span>
+											<div class="tit">
+												<span class="game">天空城：浩劫 &#183;</span>
+												<span class="gift">17173独家礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.17173.com/gift-info-41616.html" target="_blank" class="art-item">
+											<span class="date">10-26</span>
+											<div class="tit">
+												<span class="game">天空城：浩劫 &#183;</span>
+												<span class="gift">公测礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.17173.com/gift-info-41603.html" target="_blank" class="art-item">
+											<span class="date">10-26</span>
+											<div class="tit">
+												<span class="game">拳皇世界 &#183;</span>
+												<span class="gift">内测体验礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.17173.com/gift-info-41602.html" target="_blank" class="art-item">
+											<span class="date">10-26</span>
+											<div class="tit">
+												<span class="game">正义联盟：超级英雄 &#183;</span>
+												<span class="gift">终极测试礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.17173.com/gift-info-41598.html" target="_blank" class="art-item">
+											<span class="date">10-26</span>
+											<div class="tit">
+												<span class="game">天使纪元 &#183;</span>
+												<span class="gift">17173尊享礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+								</ul>
+							</div>
+							<div style="display:none">
+								<ul class="list">
+
+									<li class="item">
+										<a href="http://hao.yeyou.com/gift-info-41626.html" target="_blank" class="art-item">
+											<span class="date">10-27</span>
+											<div class="tit">
+												<span class="game">第一舰队 &#183;</span>
+												<span class="gift">37游戏山川草木礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.yeyou.com/gift-info-41625.html" target="_blank" class="art-item">
+											<span class="date">10-27</span>
+											<div class="tit">
+												<span class="game">大话女儿国 &#183;</span>
+												<span class="gift">37游戏气运加身礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.yeyou.com/gift-info-41624.html" target="_blank" class="art-item">
+											<span class="date">10-27</span>
+											<div class="tit">
+												<span class="game">楚乔传 &#183;</span>
+												<span class="gift">37游戏天命所归礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.yeyou.com/gift-info-41623.html" target="_blank" class="art-item">
+											<span class="date">10-27</span>
+											<div class="tit">
+												<span class="game">七绝 &#183;</span>
+												<span class="gift">51wan豪华礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.yeyou.com/gift-info-41622.html" target="_blank" class="art-item">
+											<span class="date">10-26</span>
+											<div class="tit">
+												<span class="game">攻沙 &#183;</span>
+												<span class="gift">9377平台yeyou专属礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.yeyou.com/gift-info-41613.html" target="_blank" class="art-item">
+											<span class="date">10-26</span>
+											<div class="tit">
+												<span class="game">金装传奇 &#183;</span>
+												<span class="gift">37游戏黄金公测礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.yeyou.com/gift-info-41612.html" target="_blank" class="art-item">
+											<span class="date">10-26</span>
+											<div class="tit">
+												<span class="game">天地诸神 &#183;</span>
+												<span class="gift">37游戏全新奖励礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.yeyou.com/gift-info-41611.html" target="_blank" class="art-item">
+											<span class="date">10-26</span>
+											<div class="tit">
+												<span class="game">永恒纪元 &#183;</span>
+												<span class="gift">37游戏恶魔广场礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.yeyou.com/gift-info-41610.html" target="_blank" class="art-item">
+											<span class="date">10-26</span>
+											<div class="tit">
+												<span class="game">修仙记 &#183;</span>
+												<span class="gift">202游戏平台首服首充礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+									<li class="item">
+										<a href="http://hao.yeyou.com/gift-info-41609.html" target="_blank" class="art-item">
+											<span class="date">10-26</span>
+											<div class="tit">
+												<span class="game">万剑 &#183;</span>
+												<span class="gift">655游戏平台首服首充礼包</span>
+											</div>
+											<span class="comm-btn">抢号</span>
+										</a>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end.hao-welfare -->
+				<div class="game-test">
+					<div class="hd">
+						<h2 class="tit">
+							新游测试表
+						</h2>
+
+						<div class="more">
+							<a href="http://newgame.17173.com/testing-list.html" target="_blank">更多»</a>
+						</div>
+
+					</div>
+					<div class="bd">
+						<div class="test-hd">
+							<div class="c1">日期</div>
+							<div class="c2">
+								<div class="game">游戏</div>
+								<div class="state">状态</div>
+							</div>
+						</div>
+						<div class="test-bd">
+							<ul class="list">
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-11904.html" target="_blank">
+										<div class="c1">11-01</div>
+										<div class="c2">
+											<div class="game">吞噬苍穹</div>
+											<div class="state">皓月内测</div>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-1000600.html" target="_blank">
+										<div class="c1">10-28</div>
+										<div class="c2">
+											<div class="game">逍遥江湖零</div>
+											<div class="state">风云内测</div>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-11872.html" target="_blank">
+										<div class="c1">10-28</div>
+										<div class="c2">
+											<div class="game">创世神话</div>
+											<div class="state">返璞归真</div>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-1000066.html" target="_blank">
+										<div class="c1">10-28</div>
+										<div class="c2">
+											<div class="game">诸神世纪</div>
+											<div class="state">神魔之域</div>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-1000094.html" target="_blank">
+										<div class="c1">10-28</div>
+										<div class="c2">
+											<div class="game">征三国</div>
+											<div class="state">卧龙在渊</div>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-1000651.html" target="_blank">
+										<div class="c1">10-28</div>
+										<div class="c2">
+											<div class="game">逍遥武林</div>
+											<div class="state">征战测试</div>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-1000459.html" target="_blank">
+										<div class="c1">10-27</div>
+										<div class="c2">
+											<div class="game">新风云</div>
+											<div class="state">开放性测试</div>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-1000495.html" target="_blank">
+										<div class="c1">10-27</div>
+										<div class="c2">
+											<div class="game">极品飞车OL</div>
+											<div class="state">狂飙不限号</div>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-11053.html" target="_blank">
+										<div class="c1">10-27</div>
+										<div class="c2">
+											<div class="game">笑傲江湖ol</div>
+											<div class="state">大逃杀</div>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-11906.html" target="_blank">
+										<div class="c1">10-27</div>
+										<div class="c2">
+											<div class="game">蛮荒搜神记</div>
+											<div class="state">不删档测试</div>
+										</div>
+									</a>
+								</li>
+
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- end.gametest -->
+				<div class="game-rank bi-waiting-list">
+					<div class="hd">
+						<h2 class="tit">新游期待榜</h2>
+
+						<div class="more">
+							<a href="http://top.17173.com/list-1-0-0-0-0-0-0-0-0-0-1.html" target="_blank">更多&raquo;</a>
+						</div>
+
+					</div>
+					<div class="bd">
+						<div class="rank-hd">
+							<div class="c1">排名</div>
+							<div class="c2">游戏</div>
+							<div class="c3">
+								<div class="num">票数</div>
+								<div class="state">升降</div>
+							</div>
+						</div>
+						<div class="rank-bd">
+							<ul class="list js-rank">
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-11382.html" target="_blank">
+										<div class="c1">
+											<em>1</em>
+										</div>
+										<div class="c2">
+											<span class="name">
+												<i class="line"></i>流放之路</span>
+										</div>
+										<div class="c3">
+											<div class="num">83065</div>
+											<div class="state">
+
+
+												<i class="ico ico-nor"></i>
+
+
+											</div>
+										</div>
+										<div class="c4">
+											<img src="http://i2.17173cdn.com/z0og4j/YWxqaGBf/newgame/20160328/utrqKcbkoDsysxb.jpg!a-1-195x109.jpg" width="365" height="177"
+											 alt="流放之路">
+											<b class="mask"></b>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-1000504.html" target="_blank">
+										<div class="c1">
+											<em>1</em>
+										</div>
+										<div class="c2">
+											<span class="name">
+												<i class="line"></i>逆水寒</span>
+										</div>
+										<div class="c3">
+											<div class="num">69594</div>
+											<div class="state">
+
+
+												<i class="ico ico-nor"></i>
+
+
+											</div>
+										</div>
+										<div class="c4">
+											<img src="http://i2.17173cdn.com/z0og4j/YWxqaGBf/newgame/20170105/JhWYvbblfwCxaxx.jpg!a-1-195x109.jpg" width="365" height="177"
+											 alt="逆水寒">
+											<b class="mask"></b>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-1000579.html" target="_blank">
+										<div class="c1">
+											<em>1</em>
+										</div>
+										<div class="c2">
+											<span class="name">
+												<i class="line"></i>绝地求生</span>
+										</div>
+										<div class="c3">
+											<div class="num">68874</div>
+											<div class="state">
+
+
+												<i class="ico ico-nor"></i>
+
+
+											</div>
+										</div>
+										<div class="c4">
+											<img src="http://i2.17173cdn.com/z0og4j/YWxqaGBf/newgame/20161221/CTcMjvbleqmtqce.jpg!a-1-195x109.jpg" width="365" height="177"
+											 alt="绝地求生">
+											<b class="mask"></b>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-12000.html" target="_blank">
+										<div class="c1">
+											<em>1</em>
+										</div>
+										<div class="c2">
+											<span class="name">
+												<i class="line"></i>黑色沙漠</span>
+										</div>
+										<div class="c3">
+											<div class="num">63893</div>
+											<div class="state">
+
+
+												<i class="ico ico-nor"></i>
+
+
+											</div>
+										</div>
+										<div class="c4">
+											<img src="http://i1.17173cdn.com/z0og4j/YWxqaGBf/newgame/20170906/yKywVeblzkwahdd.jpg!a-1-195x109.jpg" width="365" height="177"
+											 alt="黑色沙漠">
+											<b class="mask"></b>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-11799.html" target="_blank">
+										<div class="c1">
+											<em>1</em>
+										</div>
+										<div class="c2">
+											<span class="name">
+												<i class="line"></i>MU：传奇</span>
+										</div>
+										<div class="c3">
+											<div class="num">61617</div>
+											<div class="state">
+
+
+												<i class="ico ico-nor"></i>
+
+
+											</div>
+										</div>
+										<div class="c4">
+											<img src="http://i2.17173cdn.com/z0og4j/YWxqaGBf/newgame/20160805/CLWEwdbkzmlgvjv.jpg!a-1-195x109.jpg" width="365" height="177"
+											 alt="MU：传奇">
+											<b class="mask"></b>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-20011.html" target="_blank">
+										<div class="c1">
+											<em>1</em>
+										</div>
+										<div class="c2">
+											<span class="name">
+												<i class="line"></i>地下城与勇士</span>
+										</div>
+										<div class="c3">
+											<div class="num">61507</div>
+											<div class="state">
+
+
+												<i class="ico ico-nor"></i>
+
+
+											</div>
+										</div>
+										<div class="c4">
+											<img src="http://i2.17173cdn.com/gdthue/YWxqaGBf/newgame/20140404/TJKboPbiuvzBule.jpg!a-1-195x109.jpg" width="365" height="177"
+											 alt="地下城与勇士">
+											<b class="mask"></b>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-1000495.html" target="_blank">
+										<div class="c1">
+											<em>1</em>
+										</div>
+										<div class="c2">
+											<span class="name">
+												<i class="line"></i>极品飞车OL</span>
+										</div>
+										<div class="c3">
+											<div class="num">60335</div>
+											<div class="state">
+
+
+												<i class="ico ico-nor"></i>
+
+
+											</div>
+										</div>
+										<div class="c4">
+											<img src="http://i2.17173cdn.com/z0og4j/YWxqaGBf/newgame/20160830/FhbhEPbkBmsfDqc.png!a-1-195x109.jpg" width="365" height="177"
+											 alt="极品飞车OL">
+											<b class="mask"></b>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-10898.html" target="_blank">
+										<div class="c1">
+											<em>1</em>
+										</div>
+										<div class="c2">
+											<span class="name">
+												<i class="line"></i>英雄联盟</span>
+										</div>
+										<div class="c3">
+											<div class="num">59695</div>
+											<div class="state">
+
+
+												<i class="ico ico-nor"></i>
+
+
+											</div>
+										</div>
+										<div class="c4">
+											<img src="http://i2.17173cdn.com/gdthue/YWxqaGBf/newgame/20140404/BzHmLHbiuvzCetA.jpg!a-1-195x109.jpg" width="365" height="177"
+											 alt="英雄联盟">
+											<b class="mask"></b>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-1000382.html" target="_blank">
+										<div class="c1">
+											<em>1</em>
+										</div>
+										<div class="c2">
+											<span class="name">
+												<i class="line"></i>失落的方舟</span>
+										</div>
+										<div class="c3">
+											<div class="num">59622</div>
+											<div class="state">
+
+
+												<i class="ico ico-nor"></i>
+
+
+											</div>
+										</div>
+										<div class="c4">
+											<img src="http://i2.17173cdn.com/z0og4j/YWxqaGBf/newgame/20160815/JJOINybkAgrshsF.jpg!a-1-195x109.jpg" width="365" height="177"
+											 alt="失落的方舟">
+											<b class="mask"></b>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-11857.html" target="_blank">
+										<div class="c1">
+											<em>1</em>
+										</div>
+										<div class="c2">
+											<span class="name">
+												<i class="line"></i>古剑奇谭网络版</span>
+										</div>
+										<div class="c3">
+											<div class="num">59581</div>
+											<div class="state">
+
+
+												<i class="ico ico-nor"></i>
+
+
+											</div>
+										</div>
+										<div class="c4">
+											<img src="http://i2.17173cdn.com/z0og4j/YWxqaGBf/newgame/20160815/WfflLUbkAgsFuvi.jpg!a-1-195x109.jpg" width="365" height="177"
+											 alt="古剑奇谭网络版">
+											<b class="mask"></b>
+										</div>
+									</a>
+								</li>
+
+							</ul>
+						</div>
+					</div>
+
+				</div>
+				<!-- end.gamerank -->
+				<div class="game-rank bi-game-list">
+					<div class="hd">
+						<h2 class="tit">热门游戏榜</h2>
+
+						<div class="more">
+							<a href="http://top.17173.com/list-2-0-0-0-0-0-0-0-0-0-1.html" target="_blank">更多&raquo;</a>
+						</div>
+
+					</div>
+					<div class="bd">
+						<div class="rank-hd">
+							<div class="c1">排名</div>
+							<div class="c2">游戏</div>
+							<div class="c3">
+								<div class="num">票数</div>
+								<div class="state">升降</div>
+							</div>
+						</div>
+						<div class="rank-bd">
+							<ul class="list js-rank">
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-20011.html" target="_blank">
+										<div class="c1">
+											<em>1</em>
+										</div>
+										<div class="c2">
+											<span class="name">
+												<i class="line"></i>地下城与勇士</span>
+										</div>
+										<div class="c3">
+											<div class="num">61507</div>
+											<div class="state">
+
+
+												<i class="ico ico-nor"></i>
+
+
+											</div>
+										</div>
+										<div class="c4">
+											<img src="http://i2.17173cdn.com/z0og4j/YWxqaGBf/newgame/20160719/xljPTnbkybjnsbo.png" width="365" height="177" alt="地下城与勇士">
+											<b class="mask"></b>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-10898.html" target="_blank">
+										<div class="c1">
+											<em>1</em>
+										</div>
+										<div class="c2">
+											<span class="name">
+												<i class="line"></i>英雄联盟</span>
+										</div>
+										<div class="c3">
+											<div class="num">59695</div>
+											<div class="state">
+
+
+												<i class="ico ico-nor"></i>
+
+
+											</div>
+										</div>
+										<div class="c4">
+											<img src="http://i3.17173cdn.com/gdthue/YWxqaGBf/newgame/201403312/nFjFIkbiulBbFFv.jpg" width="365" height="177" alt="英雄联盟">
+											<b class="mask"></b>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-118.html" target="_blank">
+										<div class="c1">
+											<em>1</em>
+										</div>
+										<div class="c2">
+											<span class="name">
+												<i class="line"></i>梦幻西游</span>
+										</div>
+										<div class="c3">
+											<div class="num">54689</div>
+											<div class="state">
+
+
+												<i class="ico ico-nor"></i>
+
+
+											</div>
+										</div>
+										<div class="c4">
+											<img src="http://i1.17173cdn.com/z0og4j/YWxqaGBf/newgame/20170801/vseCVKblwoeaDtx.jpg" width="365" height="177" alt="梦幻西游">
+											<b class="mask"></b>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-10268.html" target="_blank">
+										<div class="c1">
+											<em>1</em>
+										</div>
+										<div class="c2">
+											<span class="name">
+												<i class="line"></i>剑网3</span>
+										</div>
+										<div class="c3">
+											<div class="num">50956</div>
+											<div class="state">
+
+
+												<i class="ico ico-nor"></i>
+
+
+											</div>
+										</div>
+										<div class="c4">
+											<img src="http://i2.17173cdn.com/z0og4j/YWxqaGBf/newgame/20161014/iCEkqqbkFaEckwB.jpg" width="365" height="177" alt="剑网3">
+											<b class="mask"></b>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-1000046.html" target="_blank">
+										<div class="c1">
+											<em>1</em>
+										</div>
+										<div class="c2">
+											<span class="name">
+												<i class="line"></i>炉石传说</span>
+										</div>
+										<div class="c3">
+											<div class="num">50431</div>
+											<div class="state">
+
+
+												<i class="ico ico-nor"></i>
+
+
+											</div>
+										</div>
+										<div class="c4">
+											<img src="http://i3.17173cdn.com/gdthue/YWxqaGBf/newgame/201403312/CVqGcpbiulBiDDu.jpg" width="365" height="177" alt="炉石传说">
+											<b class="mask"></b>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-10807.html" target="_blank">
+										<div class="c1">
+											<em>1</em>
+										</div>
+										<div class="c2">
+											<span class="name">
+												<i class="line"></i>剑灵</span>
+										</div>
+										<div class="c3">
+											<div class="num">49475</div>
+											<div class="state">
+
+
+												<i class="ico ico-nor"></i>
+
+
+											</div>
+										</div>
+										<div class="c4">
+											<img src="http://i2.17173cdn.com/z0og4j/YWxqaGBf/newgame/20140808/tIpUdebiEzvczlc.jpg" width="365" height="177" alt="剑灵">
+											<b class="mask"></b>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-121.html" target="_blank">
+										<div class="c1">
+											<em>1</em>
+										</div>
+										<div class="c2">
+											<span class="name">
+												<i class="line"></i>魔兽世界</span>
+										</div>
+										<div class="c3">
+											<div class="num">48107</div>
+											<div class="state">
+
+
+												<i class="ico ico-nor"></i>
+
+
+											</div>
+										</div>
+										<div class="c4">
+											<img src="http://i2.17173cdn.com/z0og4j/YWxqaGBf/newgame/20160901/SQcSeKbkBskgFwv.jpg" width="365" height="177" alt="魔兽世界">
+											<b class="mask"></b>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-1000219.html" target="_blank">
+										<div class="c1">
+											<em>1</em>
+										</div>
+										<div class="c2">
+											<span class="name">
+												<i class="line"></i>冒险岛2</span>
+										</div>
+										<div class="c3">
+											<div class="num">47602</div>
+											<div class="state">
+
+
+												<i class="ico ico-nor"></i>
+
+
+											</div>
+										</div>
+										<div class="c4">
+											<img src="http://i2.17173cdn.com/z0og4j/YWxqaGBf/newgame/20160328/IJPmCAbkoDumBif.jpg" width="365" height="177" alt="冒险岛2">
+											<b class="mask"></b>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-10345.html" target="_blank">
+										<div class="c1">
+											<em>1</em>
+										</div>
+										<div class="c2">
+											<span class="name">
+												<i class="line"></i>穿越火线</span>
+										</div>
+										<div class="c3">
+											<div class="num">47276</div>
+											<div class="state">
+
+
+												<i class="ico ico-nor"></i>
+
+
+											</div>
+										</div>
+										<div class="c4">
+											<img src="http://i3.17173cdn.com/gdthue/YWxqaGBf/newgame/201403311/qMmyambiulAFsbz.jpg" width="365" height="177" alt="穿越火线">
+											<b class="mask"></b>
+										</div>
+									</a>
+								</li>
+
+								<li>
+									<a href="http://newgame.17173.com/game-info-10520.html" target="_blank">
+										<div class="c1">
+											<em>1</em>
+										</div>
+										<div class="c2">
+											<span class="name">
+												<i class="line"></i>QQ飞车</span>
+										</div>
+										<div class="c3">
+											<div class="num">46245</div>
+											<div class="state">
+
+
+												<i class="ico ico-nor"></i>
+
+
+											</div>
+										</div>
+										<div class="c4">
+											<img src="http://i3.17173cdn.com/gdthue/YWxqaGBf/newgame/201403310/ItbVYrbiulBamjw.jpg" width="365" height="177" alt="QQ飞车">
+											<b class="mask"></b>
+										</div>
+									</a>
+								</li>
+
+							</ul>
+						</div>
+					</div>
+
+				</div>
+				<!-- end.gamerank -->
+			</div>
+			<!-- end.side -->
+		</div>
+		<a href="javascript:;" class="btn-top"></a>
+		<!-- end.content -->
+		<!-- end.container-->
+		<div class="footer">
+			<div class="footer-in">
+				<div class="friendlink">
+					<div class="friendlink-hd">
+						<h3 class="tit">友情链接</h3>
+						<div class="more">
+							<a href="#" target="_blank"></a>
+						</div>
+					</div>
+					<div class="friendlink-bd">
+						<a href="http://newgame.17173.com/" target="_blank" class="link">17173新游频道</a>
+						<a href="http://game.163.com/" target="_blank" class="link">网易游戏</a>
+						<a href="http://game.iresearch.cn/" target="_blank" class="link">艾瑞网络游戏</a>
+						<a href="http://games.ifeng.com/" target="_blank" class="link">凤凰网游戏</a>
+						<a href="http://www.pcgames.com.cn/" target="_blank" class="link">太平洋游戏网</a>
+						<a href="http://www.7yx.com.cn/" target="_blank" class="link">7yx游戏网</a>
+						<a href="http://www.sgamer.com/" target="_blank" class="link">超级玩家</a>
+						<a href="http://www.cgigc.com.cn/" target="_blank" class="link">中国游戏产业网</a>
+						<a href="http://www.youth.cn/games/" target="_blank" class="link">中青网游戏</a>
+						<a href="http://game.weibo.com/" target="_blank" class="link">网页游戏</a>
+						<a href="http://news.yesky.com/" target="_blank" class="link">天极新闻</a>
+						<a href="http://www.wan.com/" target="_blank" class="link">网页游戏排行榜</a>
+						<a href="http://www.xiaohulu.com" target="_blank" class="link">小葫芦</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end.footer -->
+	</div>
+	<script type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/design.js"></script>
+	<div class="global-footer">
+		<a href="http://about.17173.com/" target="_blank">&#x5173;&#x4E8E;17173</a> |
+		<a href="http://about.17173.com/join-us.shtml" target="_blank">&#x4EBA;&#x624D;&#x62DB;&#x8058;</a> |
+		<a href="http://marketing.17173.com" target="_blank">&#x5E7F;&#x544A;&#x670D;&#x52A1;</a> |
+		<a href="http://about.17173.com/business-cooperate.shtml" target="_blank">&#x5546;&#x52A1;&#x6D3D;&#x8C08;</a> |
+		<a href="http://about.17173.com/contact-us.shtml" target="_blank">&#x8054;&#x7CFB;&#x65B9;&#x5F0F;</a> |
+		<a href="http://help.17173.com/" target="_blank">&#x5BA2;&#x670D;&#x4E2D;&#x5FC3;</a> |
+		<a href="http://about.17173.com/site-map.shtml" target="_blank">&#x7F51;&#x7AD9;&#x5BFC;&#x822A;</a>
+		<br />
+		<span class="copyright">Copyright &copy; 2001-2017 17173. All rights reserved.</span>
+	</div>
 </body>
+
 </html>
